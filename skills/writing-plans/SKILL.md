@@ -32,7 +32,9 @@ Use the map to inform every file decision in this plan:
 - **Entry points:** if implementation requires wiring into an entry point, reference the exact file from the map
 - **Conventions:** use the "How to Write Code Here" section from the map as the baseline for all code examples in the plan
 
-If no map exists and the codebase is non-trivial, note at the top of the plan: `> **Note:** No codebase map found. Run superpowers:codebase-map for better coverage of existing patterns.`
+If no map exists:
+- **Greenfield project (no source files yet):** Skip — there is no codebase to map.
+- **Existing codebase:** Ask before proceeding: "No codebase map found. Run `superpowers:codebase-map` first for better coverage of existing patterns? (recommended)"
 
 ## File Structure
 

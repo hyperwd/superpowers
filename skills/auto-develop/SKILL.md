@@ -9,6 +9,8 @@ One command for the complete development workflow. You are the orchestrator — 
 
 **Announce at start:** "Using auto-develop pipeline: brainstorming → writing-plans → subagent-driven-development."
 
+**Context health check:** If the current session already has a dense history (many tool calls, long conversation), warn the user: "This session has significant context usage. For best results with auto-develop, consider starting a fresh session — each subagent gets an isolated context window, but the orchestrator (this session) benefits from a clean start." Offer to continue anyway or wait for a fresh session.
+
 Check for `.superpowers/codebase/OVERVIEW.md`. If it does not exist and this is a non-trivial codebase, offer to run superpowers:codebase-map first: "No codebase map found. Run codebase-map for better context? (recommended for unfamiliar codebases)"
 
 ## Stage 1 — Design
@@ -40,7 +42,10 @@ If the user says "stop" or "not yet":
 
 ## Stage 3 — Execute
 
-After Gate 3 passes, invoke superpowers:subagent-driven-development. Follow it completely.
+After Gate 3 passes:
+
+1. **Set up isolated workspace:** Invoke `superpowers:using-git-worktrees` to create a dedicated worktree. This is required by subagent-driven-development.
+2. **Invoke superpowers:subagent-driven-development.** Follow it completely.
 
 After all tasks are marked complete, invoke superpowers:session-handoff recording completion.
 

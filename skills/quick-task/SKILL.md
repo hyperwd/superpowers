@@ -69,10 +69,6 @@ git add [specific files only]
 git commit -m "fix: [what was fixed and why]"
 ```
 
-### 7. Save State
-
-Invoke superpowers:session-handoff with a brief note about what was done.
-
 ## Red Flags
 
 | Signal | Action |
