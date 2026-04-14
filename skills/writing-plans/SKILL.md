@@ -22,6 +22,18 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 
 If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working, testable software on its own.
 
+## Codebase Map
+
+Before defining file structure, check for `.superpowers/codebase/OVERVIEW.md`. If it exists, read it now.
+
+Use the map to inform every file decision in this plan:
+- **Existing patterns:** follow the naming conventions, file organization, and test patterns documented in the map — do not invent new ones
+- **Hub files:** if a task touches a hub file (listed in the map's "Core Abstractions"), flag it explicitly in the task — changes to hubs have wide blast radius
+- **Entry points:** if implementation requires wiring into an entry point, reference the exact file from the map
+- **Conventions:** use the "How to Write Code Here" section from the map as the baseline for all code examples in the plan
+
+If no map exists and the codebase is non-trivial, note at the top of the plan: `> **Note:** No codebase map found. Run superpowers:codebase-map for better coverage of existing patterns.`
+
 ## File Structure
 
 Before defining tasks, map out which files will be created or modified and what each one is responsible for. This is where decomposition decisions get locked in.
