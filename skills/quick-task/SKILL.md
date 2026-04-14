@@ -33,6 +33,12 @@ State the task in one sentence. If you can't, stop — it needs brainstorming.
 
 ### 2. Locate
 
+**Check for codebase map first:** If `.superpowers/codebase/OVERVIEW.md` exists, read it before searching. Use the "Core Abstractions" section to quickly identify relevant files. The map's "How to Write Code Here" section will also guide your implementation style.
+
+If no map exists:
+- **Greenfield project (no source files yet):** Skip — proceed with normal implementation
+- **Existing codebase:** Optionally ask: "No codebase map found. Run `superpowers:codebase-map` first for faster file location? (optional)"
+
 Find the exact files and lines affected. Read them. Do not skip this step.
 
 ### 3. Write Failing Test (mandatory — TDD iron law)

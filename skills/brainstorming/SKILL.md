@@ -70,6 +70,8 @@ digraph brainstorming {
 **Understanding the idea:**
 
 - **Check for codebase map first:** If `.superpowers/codebase/OVERVIEW.md` exists, read it before doing anything else. Use it as your primary source of truth for: existing architecture, tech stack, naming conventions, hub files, and how code is organized. Do not re-explore what the map already covers — reference it directly. If the map is present but the task touches an area it doesn't cover, note that gap explicitly.
+  - If no map exists and this is a **greenfield project** (no source files yet), skip — there is no codebase to map.
+  - If no map exists and this is an **existing codebase**, you may optionally suggest running `superpowers:codebase-map` if the project seems unfamiliar or large.
 - Check out the current project state first (files, docs, recent commits)
 - Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., "build a platform with chat, file storage, billing, and analytics"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.
 - If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.
