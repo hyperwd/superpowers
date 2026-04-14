@@ -17,6 +17,16 @@ fi
 # Read using-superpowers content
 using_superpowers_content=$(cat "${PLUGIN_ROOT}/skills/using-superpowers/SKILL.md" 2>&1 || echo "Error reading using-superpowers skill")
 
+# Check for previous session state
+session_resume_notice=""
+session_file=".superpowers/SESSION.md"
+if [ -f "$session_file" ]; then
+    session_content=$(cat "$session_file" 2>/dev/null || echo "")
+    if [ -n "$session_content" ]; then
+        session_resume_notice="\n\n<previous-session-state>\nPrevious session state detected. Surface this to the user at the start of your first reply:\n\n${session_content}\n\nTell the user: \"Previous session found. Use superpowers:session-handoff to continue from where you left off, or say 'resume' to pick up the next action.\"\n</previous-session-state>"
+    fi
+fi
+
 # Escape string for JSON embedding using bash parameter substitution.
 # Each ${s//old/new} is a single C-level pass - orders of magnitude
 # faster than the character-by-character loop this replaces.
@@ -32,7 +42,8 @@ escape_for_json() {
 
 using_superpowers_escaped=$(escape_for_json "$using_superpowers_content")
 warning_escaped=$(escape_for_json "$warning_message")
-session_context="<EXTREMELY_IMPORTANT>\nYou have superpowers.\n\n**Below is the full content of your 'superpowers:using-superpowers' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_superpowers_escaped}\n\n${warning_escaped}\n</EXTREMELY_IMPORTANT>"
+session_resume_escaped=$(escape_for_json "$session_resume_notice")
+session_context="<EXTREMELY_IMPORTANT>\nYou have superpowers.\n\n**Below is the full content of your 'superpowers:using-superpowers' skill - your introduction to using skills. For all other skills, use the 'Skill' tool:**\n\n${using_superpowers_escaped}\n\n${warning_escaped}${session_resume_escaped}\n</EXTREMELY_IMPORTANT>"
 
 # Output context injection as JSON.
 # Cursor hooks expect additional_context (snake_case).

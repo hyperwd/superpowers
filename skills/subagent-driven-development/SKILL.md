@@ -275,3 +275,18 @@ Done!
 
 **Alternative workflow:**
 - **superpowers:executing-plans** - Use for parallel session instead of same-session execution
+
+## Context Awareness
+
+Monitor context pressure as tasks progress. Context is under pressure when:
+- 7+ tasks have been completed in this session
+- Tool call responses are getting noticeably long
+- The conversation history is very dense
+
+**When context pressure is detected:**
+1. Complete the current task fully — never abandon mid-task
+2. Immediately invoke `superpowers:session-handoff` to save state
+3. Tell the user: "Context is getting full. State saved to `.superpowers/SESSION.md`. Start a new session and say 'resume' to continue from Task [N]."
+4. Do NOT dispatch more implementer subagents after this point
+
+This prevents context overflow from corrupting work mid-task.
